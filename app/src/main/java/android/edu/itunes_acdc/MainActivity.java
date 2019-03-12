@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     public void irPrincipal(View view) {
         Intent intent=new Intent (this, Inicio.class);
         textoBusqueda=ed.getText().toString();
-
+        textoBusqueda=textoBusqueda.replaceAll(" ","%20");
         intent.putExtra("KEY",textoBusqueda);
         intent.putExtra("CONTADOR",textoSpinner());
         startActivity(intent);

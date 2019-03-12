@@ -17,6 +17,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.support.v7.widget.LinearLayoutManager;
 
+import com.squareup.picasso.Picasso;
+
 public class Inicio extends AppCompatActivity {
     RecyclerAdapter adapter;
     android.support.v7.widget.RecyclerView recyclerView;
@@ -66,6 +68,14 @@ public class Inicio extends AppCompatActivity {
             String contador=bundle.getString("CONTADOR","20");
             setReproductor(new MediaPlayer());
             setPlay(false);
+            reproductor.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    //Salta cuando finaliza la cancion
+                    //Lo usamos para cambiar el icono de play
+                    Picasso.with(getApplicationContext()).load(android.R.drawable.ic_media_play).into(playButton);
+                }
+            });
             //El execute llama a doInBackground de la clase de DescargarCanciones
             new DescargarCanciones(this).execute(contador,artista);
 
